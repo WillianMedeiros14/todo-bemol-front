@@ -27,6 +27,7 @@ const config = {
         white: {
           default: "#FFFFFF",
           500: "#7C7C7C",
+          950: "#292929",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",

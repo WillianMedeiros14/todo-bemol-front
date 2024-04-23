@@ -163,12 +163,14 @@ export function SignUp() {
 
             <span className="font-normal text-center text-white-500">ou</span>
 
-            <Link
-              href={`/`}
-              className="flex w-full h-10 px-4 py-2 bg-secondary-50 items-center justify-center text-center text-primary-600 hover:bg-primary/90 hover:text-white-default rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
+            <Button
+              asChild
+              variant={"outline"}
+              type="button"
+              className="border-none bg-secondary-50 text-primary-600"
             >
-              Já tenho uma contra
-            </Link>
+              <Link href={`/`}>Já tenho uma contra</Link>
+            </Button>
           </div>
         </form>
       </Form>
