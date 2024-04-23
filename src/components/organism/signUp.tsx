@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, LogIn } from "lucide-react";
+import { Loader2, LogIn, Save } from "lucide-react";
 import React from "react";
 import { InputComponent } from "../atoms/input-component";
 
@@ -14,51 +14,71 @@ import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(5, {
-      message: "E-mail é um campo obrigatório",
-    })
-    .email({ message: "E-mail inválido" }),
-  password: z.string().min(8, {
-    message: "Senha deve conter pelo menos 8 caracteres",
-  }),
-});
+const formSchema = z
+  .object({
+    name: z.string().min(5, {
+      message: "Nome deve ter pelo menos 6 caracteres",
+    }),
+    email: z
+      .string()
+      .min(5, {
+        message: "E-mail é um campo obrigatório",
+      })
+      .email({ message: "E-mail inválido" }),
 
-export type TypeSignIn = z.infer<typeof formSchema>;
+    password: z.string().min(8, {
+      message: "Senha deve conter pelo menos 8 caracteres",
+    }),
+    confirmPassword: z.string().min(8, {
+      message: "A confirmação de senha deve conter pelo menos 8 caracteres",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não coincidem",
+    path: ["confirmPassword"],
+  });
 
-export function SignIn() {
+export type TypeSignUp = z.infer<typeof formSchema>;
+
+export function SignUp() {
   const { toast } = useToast();
 
-  const form = useForm<TypeSignIn>({
+  const form = useForm<TypeSignUp>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: TypeSignIn) => {
-      //   return SignIn({
-      //     ...values,
-      //   });
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      // return signUpService({
+      //   ...values,
+      // });
     },
-    onSuccess: () => {
-      //   form.reset();
-      //   handleClose();
+    onSuccess: (data) => {
+      toast({
+        description: "Cadastro criado com sucesso.",
+        className: "bg-green-600 text-white",
+      });
+      form.reset();
     },
 
     onError(error: any) {
-      const { data } = error?.response;
-
-      console.log({ data });
-
-      toast({
-        description: "Erro ao realizar login",
-        variant: "destructive",
-      });
+      if (error?.code === "auth/email-already-in-use") {
+        toast({
+          description: "Esse email já está em uso",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          description: "Erro ao criar cadastro",
+          variant: "destructive",
+        });
+      }
     },
   });
 
@@ -73,6 +93,19 @@ export function SignIn() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="mt-6 w-full space-y-4"
         >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <InputComponent
+                title="Nome"
+                placeholder="Digite seu nome"
+                isLoading={isPending}
+                field={{ ...field }}
+              />
+            )}
+          />
+
           <FormField
             control={form.control}
             name="email"
@@ -100,27 +133,41 @@ export function SignIn() {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <InputComponent
+                title="Confirmação de senha"
+                type="password"
+                placeholder="Confirm sua senha"
+                isLoading={isPending}
+                field={{ ...field }}
+              />
+            )}
+          />
+
           <div className="flex flex-col gap-2">
             <Button
               disabled={false}
               type="submit"
               className="w-full bg-primary-600 mt-4 gap-2"
             >
-              Entrar
+              Cadastrar
               {isPending ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <LogIn />
+                <Save />
               )}
             </Button>
 
             <span className="font-normal text-center text-white-500">ou</span>
 
             <Link
-              href={`/register`}
+              href={`/`}
               className="flex w-full h-10 px-4 py-2 bg-secondary-50 items-center justify-center text-center text-primary-600 hover:bg-primary/90 hover:text-white-default rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
             >
-              Cadastre-se
+              Já tenho uma contra
             </Link>
           </div>
         </form>
