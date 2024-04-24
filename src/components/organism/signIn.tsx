@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 
 const formSchema = z.object({
   email: z
@@ -30,6 +31,7 @@ export type TypeSignIn = z.infer<typeof formSchema>;
 
 export function SignIn() {
   const { toast } = useToast();
+  const { SignIn } = useAuth();
 
   const form = useForm<TypeSignIn>({
     resolver: zodResolver(formSchema),
@@ -41,19 +43,16 @@ export function SignIn() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: TypeSignIn) => {
-      //   return SignIn({
-      //     ...values,
-      //   });
+      return SignIn({
+        ...values,
+      });
     },
     onSuccess: () => {
-      //   form.reset();
-      //   handleClose();
+      form.reset();
     },
 
     onError(error: any) {
       const { data } = error?.response;
-
-      console.log({ data });
 
       toast({
         description: "Erro ao realizar login",
