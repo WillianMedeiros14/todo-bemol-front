@@ -30,7 +30,7 @@ export function ModalSignOut() {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button
-          className="text-red-600 hover:text-red-400 gap-2"
+          className="font-normal text-red-600 bg-secondary-100 hover:text-red-400 gap-2 p-2 w-full justify-start"
           variant="ghost"
         >
           <LogOut />
