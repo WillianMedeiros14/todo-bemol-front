@@ -23,6 +23,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ModalDeleteTodo } from "./modal-delete-todo";
+import { UpdateTodo } from "./update-todo";
 interface IOnCheckedProps {
   completed: boolean;
   id: number;
@@ -129,10 +130,7 @@ export function TodoHome() {
                         <Ellipsis />
                       </PopoverTrigger>
                       <PopoverContent className="flex flex-col gap-2">
-                        <Button className="bg-transparent text-black gap-2 hover:text-white-default">
-                          <Edit3 />
-                          Editar
-                        </Button>
+                        <UpdateTodo dataUpdate={item} />
 
                         <ModalDeleteTodo id={item.id} onRefetch={refetch} />
                       </PopoverContent>
