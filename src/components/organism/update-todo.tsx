@@ -122,7 +122,7 @@ export function UpdateTodo({ dataUpdate }: IUpdateTodo) {
           </SheetClose>
           <div>
             <SheetTitle>Tarefa</SheetTitle>
-            <SheetDescription>Crie sua tarefa</SheetDescription>
+            <SheetDescription>Edit sua tarefa</SheetDescription>
           </div>
         </SheetHeader>
 
