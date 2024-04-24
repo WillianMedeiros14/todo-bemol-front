@@ -84,14 +84,6 @@ export function ModalDeleteTodo({ id, onRefetch }: IPropsModalDeleteTodo) {
             {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Sim, excluir
           </Button>
-          {/* <AlertDialogAction className="bg-secondary-500">
-
-
-
-            Sim, excluir
-
-            {isPending &&  <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          </AlertDialogAction> */}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -16,7 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/axios";
 import { useToast } from "../ui/use-toast";
 import { formatLastEditedAgo } from "@/functions/formatLastEditedAgo";
-import { Button } from "../ui/button";
+
 import {
   Popover,
   PopoverContent,
@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/popover";
 import { ModalDeleteTodo } from "./modal-delete-todo";
 import { UpdateTodo } from "./update-todo";
+import { Button } from "../ui/button";
 interface IOnCheckedProps {
   completed: boolean;
   id: number;
@@ -113,13 +114,15 @@ export function TodoHome() {
 
                       <span className="text-sm font-semibold">{item.name}</span>
                     </div>
-                    <div className="flex flex-1 justify-center items-center">
+                    <div className="flex flex-1 justify-end gap-3">
                       <span>{`Última edição ${formatLastEditedAgo(
                         item.updatedAt
                       )}`}</span>
                     </div>
 
-                    <AccordionTrigger />
+                    <Button variant={"ghost"}>
+                      <AccordionTrigger />
+                    </Button>
                   </div>
 
                   <AccordionContent className="flex flex-row justify-between">
