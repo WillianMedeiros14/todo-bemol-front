@@ -13,10 +13,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { signOutService } from "@/services/signOut.service";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
-    name: z.string().min(5, {
+    username: z.string().min(5, {
       message: "Nome deve ter pelo menos 6 caracteres",
     }),
     email: z
@@ -42,11 +45,12 @@ export type TypeSignUp = z.infer<typeof formSchema>;
 
 export function SignUp() {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<TypeSignUp>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -55,9 +59,9 @@ export function SignUp() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: z.infer<typeof formSchema>) => {
-      // return signUpService({
-      //   ...values,
-      // });
+      return signOutService({
+        ...values,
+      });
     },
     onSuccess: (data) => {
       toast({
@@ -65,12 +69,17 @@ export function SignUp() {
         className: "bg-green-600 text-white",
       });
       form.reset();
+      router.back();
     },
 
     onError(error: any) {
-      if (error?.code === "auth/email-already-in-use") {
+      if (
+        error.response?.data?.errors?.length > 0 &&
+        error.response?.data?.errors[0]?.message ===
+          "The email field is not unique"
+      ) {
         toast({
-          description: "Esse email já está em uso",
+          description: "Este e-mail já está sendo ultilizado",
           variant: "destructive",
         });
       } else {
@@ -95,7 +104,7 @@ export function SignUp() {
         >
           <FormField
             control={form.control}
-            name="name"
+            name="username"
             render={({ field }) => (
               <InputComponent
                 title="Nome"
