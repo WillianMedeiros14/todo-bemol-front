@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/axios";
 import { useToast } from "../ui/use-toast";
@@ -112,21 +112,17 @@ export function TodoHome() {
                         }}
                       />
 
-                      <span className="text-sm font-semibold">{item.name}</span>
+                      <AccordionTrigger className="gap-2">
+                        <span className="text-sm font-semibold">
+                          {item.name}
+                        </span>
+                      </AccordionTrigger>
                     </div>
                     <div className="flex flex-1 justify-end gap-3">
                       <span>{`Última edição ${formatLastEditedAgo(
                         item.updatedAt
                       )}`}</span>
                     </div>
-
-                    <Button variant={"ghost"}>
-                      <AccordionTrigger />
-                    </Button>
-                  </div>
-
-                  <AccordionContent className="flex flex-row justify-between">
-                    {`${item.description ? item.description : "-"}`}
 
                     <Popover>
                       <PopoverTrigger>
@@ -138,6 +134,20 @@ export function TodoHome() {
                         <ModalDeleteTodo id={item.id} onRefetch={refetch} />
                       </PopoverContent>
                     </Popover>
+                  </div>
+
+                  <AccordionContent className="flex flex-row justify-between">
+                    <br />
+                    {item.description ? (
+                      item.description.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))
+                    ) : (
+                      <br />
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}
