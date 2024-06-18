@@ -14,7 +14,7 @@ Todo o design foi criado pelo meu amigo [Thiago Fragata](https://www.linkedin.co
 
 ## ✅ Resultado do projeto
 
-Você pode assistir ao vídeo do resultado do projeto [aqui](resultProject/resultProject.mp4).
+Você pode assistir ao vídeo do resultado do projeto [aqui](https://drive.google.com/file/d/1yIhzAOkfriXWtlAQoDPZjtMYVQiz4lyx/view?usp=sharing).
 
 <br><br>
 
