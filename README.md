@@ -14,11 +14,7 @@ Todo o design foi criado pelo meu amigo [Thiago Fragata](https://www.linkedin.co
 
 ## ✅ Resultado do projeto
 
-<div style="text-align: center;">
-    <video width="800" controls>
-        <source src="resultProject/resultProject.mp4" type="video/mp4">
-    </video>
-</div>
+Você pode assistir ao vídeo do resultado do projeto [aqui](resultProject/resultProject.mp4).
 
 <br><br>
 
