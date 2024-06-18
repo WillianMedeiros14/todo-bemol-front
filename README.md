@@ -16,7 +16,7 @@ Todo o design foi criado pelo meu amigo [Thiago Fragata](https://www.linkedin.co
 
 <div style="text-align: center;">
     <video width="800" controls>
-        <source src="./resultProject/resultProject.mp4" type="video/mp4">
+        <source src="resultProject/resultProject.mp4" type="video/mp4">
     </video>
 </div>
 
