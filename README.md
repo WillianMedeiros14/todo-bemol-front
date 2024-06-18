@@ -9,12 +9,12 @@ A api se encontra em: [Api todo](https://github.com/WillianMedeiros14/todo-bemol
 
 ## 💡 Design
 
-Neste [link](<https://www.figma.com/design/yVsSUgE6e2yXsbQoxkOE61/To-Do-Bemol-(Copy)?node-id=0-1&t=SJRNEwwKocRUHHG0-0>) do figma pode ser visualizado todo o layout do projeto.<br>
+Neste [link](<https://www.figma.com/design/yVsSUgE6e2yXsbQoxkOE61/To-Do-Bemol-(Copy)?node-id=0-1&t=SJRNEwwKocRUHHG0-0>) do figma pode ser visualizado todo o layout do projeto. <br>
 Todo o design foi criado pelo meu amigo [Thiago Fragata](https://www.linkedin.com/in/thiagohenriquefragata). <br><br>
 
 ## ✅ Resultado do projeto
 
-Você pode assistir ao vídeo do resultado do projeto [aqui](resultProject/resultProject.mp4).
+Você pode assistir ao vídeo do resultado do projeto [aqui](https://drive.google.com/file/d/1yIhzAOkfriXWtlAQoDPZjtMYVQiz4lyx/view?usp=sharing).
 
 <br><br>
 
